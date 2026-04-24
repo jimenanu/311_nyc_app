@@ -68,7 +68,7 @@ for feature in geojson["features"]:
     feature["properties"]["color"] = [247, 227, 0, min(255, int(val / 50000))]
 
 #  LOGO
-col1, col2 = st.columns([2,4])
+col1, col2, col3 = st.columns([2,4,1])
 
 with col1:
     st.image("T51-NB2.png", width=400)
@@ -80,6 +80,9 @@ with col2:
         <h3 style='margin-top:0; color:#FFD700;'>Clarity at the highest level</h3>
     </div>
     """, unsafe_allow_html=True)
+
+with col3:
+    st.image("nyc311-logo.png", width=120)
 
 # HEADER
 st.title("Team 51 - 498 Capstone")
