@@ -11,6 +11,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.set_page_config(
+    page_title="311 NYC App",
+    layout="wide"
+)
+
+st.set_page_config(
     page_title="Team 51 | NYC 311 Tracker",
     layout="wide"
 )
