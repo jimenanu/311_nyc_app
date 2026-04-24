@@ -69,6 +69,7 @@ for feature in geojson["features"]:
 
 #  LOGO
 st.image("T51-NB2.png", use_column_width=True)
+st.markdown("---")
 
 # HEADER
 st.title("NYC 311 Analytics Tracker")
