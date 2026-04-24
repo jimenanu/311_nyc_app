@@ -76,12 +76,12 @@ with col1:
 with col2:
     st.markdown("""
     # NYC 311 Analytics Tracker  
-    ### Clarity at the highest level  
+    ### Clarity at the highest level
     """)
 
 # HEADER
-st.title("NYC 311 Analytics Tracker")
-st.caption("Clarity at the highest level")
+st.title("Team 51 - Northwestern University")
+st.caption("Harrison Karp - Elizabeth Conwell - Rachel Nugent - Christopher Lee - Jimena Navarro")
 
 # KPIs
 c1, c2, c3 = st.columns(3)
