@@ -257,3 +257,48 @@ st.dataframe(
 )
 
 st.caption("Built by Team 51 using Python, Streamlit, GitHub, Parquet, PyDeck, and NYC 311 data.")
+
+st.divider()
+
+# =========================
+# ABOUT US
+# =========================
+
+st.markdown("## About the Project")
+
+st.markdown("""
+This dashboard was developed as part of the **MSDS 498 Capstone Project**.  
+
+Our objective is to analyze New York City's 311 service request data to identify:
+- Operational bottlenecks  
+- High-impact complaint categories  
+- Agencies driving delays and system pressure  
+
+By leveraging data engineering, analytics, and visualization, this tool provides actionable insights to improve response efficiency and resource allocation across the 311 system.
+""")
+
+st.markdown("""
+### About the Team  
+Team 51 is composed of graduate students specializing in data science, analytics, and operations.
+
+Our work focuses on transforming large-scale public datasets into decision-ready insights through modern data pipelines and interactive dashboards.
+""")
+
+st.markdown("""
+### Project Context  
+NYC 311 is a critical system for managing citizen service requests.  
+However, the system operates largely in a reactive mode.
+
+This project aims to shift towards a more **data-driven and proactive model**,  
+identifying where delays originate and how operational efficiency can be improved.
+""")
+
+# 👇 TEAM IMAGE (la que subiste)
+st.image("TEAM51.png", use_column_width=True)
+
+st.markdown("""
+<div style='text-align:center; color:gray; margin-top:10px;'>
+Northwestern University — Master of Science in Data Science (MSDS)  
+Capstone Project | 2026
+</div>
+""", unsafe_allow_html=True)
