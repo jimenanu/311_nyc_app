@@ -80,7 +80,7 @@ with col2:
     """)
 
 # HEADER
-st.title("Team 51 - Northwestern University")
+st.title("Team 51 - 498 Capstone")
 st.caption("Harrison Karp - Elizabeth Conwell - Rachel Nugent - Christopher Lee - Jimena Navarro")
 
 # KPIs
