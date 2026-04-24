@@ -68,16 +68,18 @@ for feature in geojson["features"]:
     feature["properties"]["color"] = [247, 227, 0, min(255, int(val / 50000))]
 
 #  LOGO
-col1, col2 = st.columns([1,3])
+col1, col2 = st.columns([2,4])
 
 with col1:
-    st.image("T51-NB2.png", use_column_width=True)
+    st.image("T51-NB2.png", width=400)
 
 with col2:
     st.markdown("""
-    # NYC 311 Analytics Tracker  
-    ### Clarity at the highest level
-    """)
+    <div style="display:flex; flex-direction:column; justify-content:center; height:100%;">
+        <h1 style='margin-bottom:5px;'>NYC 311 Analytics Tracker</h1>
+        <h3 style='margin-top:0; color:#FFD700;'>Clarity at the highest level</h3>
+    </div>
+    """, unsafe_allow_html=True)
 
 # HEADER
 st.title("Team 51 - 498 Capstone")
