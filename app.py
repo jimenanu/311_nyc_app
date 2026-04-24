@@ -4,7 +4,7 @@ import pydeck as pdk
 import json
 
 st.set_page_config(
-    page_title="Team 51 | NYC 311 Dashboard",
+    page_title="Team 51 | NYC 311 Tracker",
     layout="wide"
 )
 
