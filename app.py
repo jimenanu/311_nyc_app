@@ -399,7 +399,7 @@ elif st.session_state.page == "about":
 
     st.markdown("""
     <div style='text-align:center; color:#8A8A8A; margin-top:16px; font-size:14px;'>
-    Northwestern University — Master of Science in Data Science (MSDS)<br>
+    Northwestern University — Master of Science in Data Science<br>
     MSDS 498 Capstone Project | 2026
     </div>
     """, unsafe_allow_html=True)
