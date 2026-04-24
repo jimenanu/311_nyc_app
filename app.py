@@ -71,7 +71,7 @@ for feature in geojson["features"]:
 st.image("T51-NB2.png", width=280)
 
 # HEADER
-st.title("NYC 311 Analytics Dashboard")
+st.title("NYC 311 Analytics Tracker")
 st.caption("Clarity at the highest level")
 
 # KPIs
