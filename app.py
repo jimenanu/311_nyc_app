@@ -98,7 +98,7 @@ c3.metric("Boroughs", borough["borough"].nunique())
 c4.metric("Top Volume Borough", top_borough)
 
 st.markdown("""
-### 🔎 Key Insight  
+### Key Insight  
 Workload and resolution times are not evenly distributed across the 311 system.  
 A small number of boroughs and agencies drive a large share of operational pressure.
 """)
