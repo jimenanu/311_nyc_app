@@ -13,7 +13,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 .stApp {
-    background-color: #050505;
+    background-color: #000000;
     color: #F5F5F5;
 }
 h1, h2, h3 {
