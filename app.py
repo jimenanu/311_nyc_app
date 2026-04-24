@@ -4,6 +4,12 @@ import pydeck as pdk
 import altair as alt
 import json
 
+st.markdown("""
+<link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icon.png">
+""", unsafe_allow_html=True)
+
 st.set_page_config(
     page_title="Team 51 | NYC 311 Tracker",
     layout="wide"
