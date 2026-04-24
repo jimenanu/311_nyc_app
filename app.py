@@ -264,41 +264,66 @@ st.divider()
 # ABOUT US
 # =========================
 
-st.markdown("## About the Project")
+st.divider()
 
 st.markdown("""
-This dashboard was developed as part of the **MSDS 498 Capstone Project**.  
+## About the Project
 
-Our objective is to analyze New York City's 311 service request data to identify:
-- Operational bottlenecks  
-- High-impact complaint categories  
-- Agencies driving delays and system pressure  
+<div style="
+    background-color:#0D0D0D;
+    border:1px solid #2E2E2E;
+    border-left:6px solid #FFD700;
+    padding:24px;
+    border-radius:16px;
+    margin-bottom:24px;
+">
+    <h3 style="color:#FFD700; margin-top:0;">MSDS 498 Capstone | Team 51</h3>
+    <p style="font-size:16px; line-height:1.6;">
+    This dashboard was developed as part of the <b>Northwestern University MSDS 498 Capstone Project</b>.
+    Team 51 analyzes New York City’s 311 service request system to identify where operational pressure,
+    long-duration cases, and repeat complaints are concentrated.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
-By leveraging data engineering, analytics, and visualization, this tool provides actionable insights to improve response efficiency and resource allocation across the 311 system.
-""")
+colA, colB, colC = st.columns(3)
+
+with colA:
+    st.markdown("""
+    <div style="background-color:#111111; padding:20px; border-radius:14px; border:1px solid #2E2E2E;">
+        <h4 style="color:#FFD700;">Objective</h4>
+        <p>Improve service responsiveness and operational efficiency across NYC 311.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with colB:
+    st.markdown("""
+    <div style="background-color:#111111; padding:20px; border-radius:14px; border:1px solid #2E2E2E;">
+        <h4 style="color:#FFD700;">Focus Areas</h4>
+        <p>Workload drivers, agency performance gaps, delay risk, and repeat complaint patterns.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with colC:
+    st.markdown("""
+    <div style="background-color:#111111; padding:20px; border-radius:14px; border:1px solid #2E2E2E;">
+        <h4 style="color:#FFD700;">Deliverable</h4>
+        <p>An interactive analytics tracker to support prioritization and data-driven decision-making.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown("""
-### About the Team  
-Team 51 is composed of graduate students specializing in data science, analytics, and operations.
-
-Our work focuses on transforming large-scale public datasets into decision-ready insights through modern data pipelines and interactive dashboards.
+### About the Team
+Team 51 is composed of graduate students specializing in data science, analytics, business intelligence,
+process improvement, and operations. Our work transforms large-scale public data into decision-ready insights
+through data engineering, visualization, and applied analytics.
 """)
 
-st.markdown("""
-### Project Context  
-NYC 311 is a critical system for managing citizen service requests.  
-However, the system operates largely in a reactive mode.
-
-This project aims to shift towards a more **data-driven and proactive model**,  
-identifying where delays originate and how operational efficiency can be improved.
-""")
-
-# 👇 TEAM IMAGE (la que subiste)
 st.image("TEAM51.png", use_column_width=True)
 
 st.markdown("""
-<div style='text-align:center; color:gray; margin-top:10px;'>
-Northwestern University — Master of Science in Data Science (MSDS)  
-Capstone Project | 2026
+<div style='text-align:center; color:#8A8A8A; margin-top:16px; font-size:14px;'>
+Northwestern University — Master of Science in Data Science (MSDS)<br>
+MSDS 498 Capstone Project | 2026
 </div>
 """, unsafe_allow_html=True)
