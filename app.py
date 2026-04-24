@@ -391,8 +391,7 @@ elif st.session_state.page == "about":
 
     st.markdown("""
     ### About the Team
-    Team 51 is composed of graduate students specializing in data science, analytics, business intelligence,
-    process improvement, and operations. Our work transforms large-scale public data into decision-ready insights
+    Team 51 is composed of graduate students specializing in data science. Our work transforms large-scale public data into decision-ready insights
     through data engineering, visualization, and applied analytics.
     """)
 
