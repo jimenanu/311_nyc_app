@@ -68,10 +68,16 @@ for feature in geojson["features"]:
     feature["properties"]["color"] = [247, 227, 0, min(255, int(val / 50000))]
 
 #  LOGO
-col1, col2, col3 = st.columns([1,2,1])
+col1, col2 = st.columns([1,3])
+
+with col1:
+    st.image("T51-NB2.png", use_column_width=True)
 
 with col2:
-    st.image("T51-NB2.png", use_column_width=True)
+    st.markdown("""
+    # NYC 311 Analytics Tracker  
+    ### Clarity at the highest level  
+    """)
 
 # HEADER
 st.title("NYC 311 Analytics Tracker")
