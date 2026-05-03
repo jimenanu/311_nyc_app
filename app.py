@@ -11,11 +11,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.set_page_config(
-    page_title="311 NYC App",
-    layout="wide"
-)
-
-st.set_page_config(
     page_title="Team 51 | NYC 311 Tracker",
     layout="wide"
 )
@@ -82,7 +77,10 @@ div.stButton > button:hover {
 if "page" not in st.session_state:
     st.session_state.page = "dashboard"
 
-nav_left, nav_right = st.columns([5, 2])
+if "saved_views" not in st.session_state:
+    st.session_state.saved_views = []
+
+nav_left, nav_right = st.columns([5, 3])
 
 with nav_left:
     st.markdown(
@@ -91,7 +89,7 @@ with nav_left:
     )
 
 with nav_right:
-    b1, b2 = st.columns(2)
+    b1, b2, b3 = st.columns(3)
 
     with b1:
         if st.button("Dashboard"):
@@ -100,6 +98,10 @@ with nav_right:
     with b2:
         if st.button("About Us"):
             st.session_state.page = "about"
+
+    with b3:
+        if st.button("User Profile"):
+            st.session_state.page = "profile"
 
 st.divider()
 
@@ -169,7 +171,6 @@ def theme_chart(chart):
 # =========================
 if st.session_state.page == "dashboard":
 
-    # LOGO / HERO
     col1, col2, col3 = st.columns([2, 4, 1])
 
     with col1:
@@ -207,7 +208,6 @@ if st.session_state.page == "dashboard":
 
     st.divider()
 
-    # MAP
     st.subheader("Interactive NYC Borough Map")
 
     layer = pdk.Layer(
@@ -414,3 +414,127 @@ elif st.session_state.page == "about":
     MSDS 498 Capstone Project | 2026
     </div>
     """, unsafe_allow_html=True)
+
+# =========================
+# USER PROFILE PAGE
+# =========================
+elif st.session_state.page == "profile":
+
+    col1, col2, col3 = st.columns([2, 4, 1])
+
+    with col1:
+        st.image("T51-NB2.png", width=500)
+
+    with col2:
+        st.markdown("""
+        <div style="display:flex; flex-direction:column; justify-content:center; height:100%;">
+            <h1 style='margin-bottom:5px;'>User Profile</h1>
+            <h3 style='margin-top:0; color:#FFD700;'>Personalized NYC 311 Experience</h3>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.image("nyc311-logo.png", width=120)
+
+    st.markdown("""
+    <div class="section-card">
+        <h3 style="color:#FFD700; margin-top:0;">Personalization</h3>
+        <p style="font-size:16px; line-height:1.6;">
+        This section helps transform the dashboard into a more app-like experience by allowing users
+        to define their preferences, save views, and focus on the insights that matter most to them.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    profile_col1, profile_col2, profile_col3 = st.columns(3)
+
+    with profile_col1:
+        st.markdown("""
+        <div class="mini-card">
+            <h4 style="color:#FFD700;">Favorite Borough</h4>
+            <p>Select the borough you want to prioritize in your 311 analysis.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        favorite_borough = st.selectbox(
+            "Choose your favorite borough",
+            sorted(borough["borough"].unique())
+        )
+
+    with profile_col2:
+        st.markdown("""
+        <div class="mini-card">
+            <h4 style="color:#FFD700;">Preferred Complaint Types</h4>
+            <p>Pick the complaint categories you would like to monitor more closely.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        preferred_complaints = st.multiselect(
+            "Choose preferred complaint types",
+            [
+                "Noise",
+                "Heat / Hot Water",
+                "Illegal Parking",
+                "Street Condition",
+                "Sanitation",
+                "Water System",
+                "Building Maintenance",
+                "Traffic Signal",
+                "Other"
+            ]
+        )
+
+    with profile_col3:
+        st.markdown("""
+        <div class="mini-card">
+            <h4 style="color:#FFD700;">Saved Views</h4>
+            <p>Create bookmarks for views or analyses you want to revisit later.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        saved_view_name = st.text_input("Name this saved view")
+
+        if st.button("Save View"):
+            if saved_view_name.strip():
+                st.session_state.saved_views.append({
+                    "name": saved_view_name,
+                    "borough": favorite_borough,
+                    "complaints": preferred_complaints
+                })
+                st.success(f"Saved view: {saved_view_name}")
+            else:
+                st.warning("Please enter a name before saving the view.")
+
+    st.divider()
+
+    st.subheader("Your Personalized Summary")
+
+    summary1, summary2, summary3 = st.columns(3)
+
+    with summary1:
+        st.metric("Selected Borough", favorite_borough)
+
+    with summary2:
+        st.metric("Preferred Types", len(preferred_complaints))
+
+    with summary3:
+        st.metric("Saved Views", len(st.session_state.saved_views))
+
+    st.markdown(f"""
+    ### Profile Readout  
+    - Your selected borough is **{favorite_borough}**.  
+    - Your preferred complaint types are: **{", ".join(preferred_complaints) if preferred_complaints else "None selected yet"}**.  
+    - These preferences can later be connected to dashboard filters, personalized alerts, and custom analytics views.
+    """)
+
+    st.divider()
+
+    st.subheader("Saved Views / Bookmarks")
+
+    if len(st.session_state.saved_views) > 0:
+        saved_views_df = pd.DataFrame(st.session_state.saved_views)
+        st.dataframe(saved_views_df, use_container_width=True)
+    else:
+        st.info("No saved views yet. Create one above to bookmark your preferred view.")
+
+    st.caption("User profile section added to make the Team 51 app feel more personalized and interactive.")
