@@ -22,12 +22,13 @@ def load_chatbot_context(parquet_path: str = DEFAULT_CONTEXT_PARQUET) -> pd.Data
     if str(parquet_path).startswith("http"):
         temp_path = "chatbot_context_temp.parquet"
 
+        file_id = "1d2MtRMFB8Oinw60BF1ia-gfCICfMGXhe"
+        gdown_url = f"https://drive.google.com/uc?id={file_id}"
+
         gdown.download(
-            parquet_path,
-            temp_path,
-            quiet=False,
-            fuzzy=True
-        )
+        gdown_url,
+        temp_path,
+        quiet=False)
 
         df = pd.read_parquet(temp_path)
         source_name = "google_drive_context"
