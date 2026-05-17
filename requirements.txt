@@ -3,3 +3,4 @@ pandas
 pyarrow
 pydeck
 altair
+openai
