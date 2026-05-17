@@ -90,25 +90,21 @@ with nav_left:
     )
 
 with nav_right:
-    b1, b2, b3, b4 = st.columns(4)
+    page_options = {
+        "Dashboard": "dashboard",
+        "About Us": "about",
+        "User Profile": "profile",
+        "AI Chatbot": "chatbot"
+    }
 
-    with b1:
-        if st.button("Dashboard"):
-            st.session_state.page = "dashboard"
+    selected_label = st.radio(
+        "Navigation",
+        list(page_options.keys()),
+        horizontal=True,
+        label_visibility="collapsed"
+    )
 
-    with b2:
-        if st.button("About Us"):
-            st.session_state.page = "about"
-
-    with b3:
-        if st.button("User Profile"):
-            st.session_state.page = "profile"
-
-    with b4:
-        if st.button("AI Chatbot"):
-            st.session_state.page = "chatbot"
-
-st.divider()
+    st.session_state.page = page_options[selected_label]
 
 # =========================
 # DATA
