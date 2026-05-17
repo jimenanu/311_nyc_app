@@ -14,20 +14,34 @@ DEFAULT_OPENAI_MODEL = "gpt-4.1-mini"
 
 def load_chatbot_context(parquet_path: str = DEFAULT_CONTEXT_PARQUET) -> pd.DataFrame:
     """
-    Load the local chatbot context parquet created from project outputs.
-
-    For deployment, place chatbot_context.parquet in the same folder as app.py,
-    chatbot_page.py, and chatbot_engine.py, or pass a different path from the page.
+    Load chatbot context from either:
+    - local parquet file
+    - downloadable URL, including Google Drive direct links
     """
-    path = Path(parquet_path)
 
-    if not path.exists():
-        raise FileNotFoundError(
-            f"Parquet file not found: {path}. "
-            "Place chatbot_context.parquet in the app folder or update the path in chatbot_page.py."
-        )
+    if str(parquet_path).startswith("http"):
+        response = requests.get(parquet_path, timeout=60)
+        response.raise_for_status()
 
-    df = pd.read_parquet(path)
+        temp_path = "chatbot_context_temp.parquet"
+
+        with open(temp_path, "wb") as f:
+            f.write(response.content)
+
+        df = pd.read_parquet(temp_path)
+        source_name = "google_drive_context"
+
+    else:
+        path = Path(parquet_path)
+
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Parquet file not found: {path}. "
+                "Place chatbot_context.parquet in the app folder or update the path in chatbot_page.py."
+            )
+
+        df = pd.read_parquet(path)
+        source_name = path.name
 
     df.columns = (
         df.columns.astype(str)
@@ -50,13 +64,12 @@ def load_chatbot_context(parquet_path: str = DEFAULT_CONTEXT_PARQUET) -> pd.Data
         df["context_type"] = "general_project_context"
 
     if "source_file" not in df.columns:
-        df["source_file"] = path.name
+        df["source_file"] = source_name
 
     if "topic_hint" not in df.columns:
         df["topic_hint"] = "general"
 
     return df
-
 
 def nyc_api_get(params: Dict, timeout: int = 30) -> pd.DataFrame:
     """Small, safe NYC Open Data API request for demo use."""
