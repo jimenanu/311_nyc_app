@@ -3,7 +3,6 @@ import pandas as pd
 import pydeck as pdk
 import altair as alt
 import json
-from chatbot_utils import generate_311_response
 import streamlit.components.v1 as components
 
 st.markdown("""
@@ -613,24 +612,44 @@ elif st.session_state.page == "chatbot":
 
         result = generate_311_response(user_question)
 
-        assistant_response = f"""
-### Classification
-- **Issue:** {result["issue"]}
-- **Agency:** {result["agency"]}
-- **Confidence Score:** {result["confidence"]}
-- **Escalation Recommendation:** {result["urgency"]}
-- **Recommended Action:** {result["action"]}
+        elif st.session_state.page == "chatbot":
+# =========================
+# AI CHATBOT PAGE
+# =========================
+elif st.session_state.page == "chatbot":
 
-### Response
-{result["response"]}
-"""
+    col1, col2, col3 = st.columns([2, 4, 1])
 
-        st.session_state.chat_history.append({
-            "role": "assistant",
-            "content": assistant_response
-        })
+    with col1:
+        st.image("T51-NB2.png", width=500)
 
-        st.rerun()
+    with col2:
+        st.markdown("""
+        <div style="display:flex; flex-direction:column; justify-content:center; height:100%;">
+            <h1 style='margin-bottom:5px;'>NYC 311 GenAI Chatbot</h1>
+            <h3 style='margin-top:0; color:#FFD700;'>Guided 311 support powered by project context</h3>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.image("nyc311-logo.png", width=120)
+
+    st.markdown("""
+    <div class="section-card">
+        <h3 style="color:#FFD700; margin-top:0;">Ask the Assistant</h3>
+        <p style="font-size:16px; line-height:1.6;">
+        This section connects the mobile app interface to Chris’s enhanced NYC 311 GenAI chatbot.
+        It uses structured intent logic, project context, and OpenAI to generate guided 311 support.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    try:
+        from chatbot_page import render_chatbot_page
+        render_chatbot_page()
+    except Exception as e:
+        st.error("The chatbot page could not load.")
+        st.exception(e)
 # =========================
 # TABLEAU PAGE
 # =========================
