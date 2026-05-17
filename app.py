@@ -69,14 +69,31 @@ div.stButton > button:hover {
     border:1px solid #2E2E2E;
     min-height:150px;
 }
-</style>
-""", unsafe_allow_html=True)
 [data-testid="stRadio"] div[role="radiogroup"] {
     display: flex;
     gap: 12px;
     justify-content: flex-end;
     flex-wrap: nowrap;
 }
+
+[data-testid="stRadio"] label {
+    background-color: #111111;
+    color: #FFD700 !important;
+    border: 1px solid #333333;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+[data-testid="stRadio"] label:hover {
+    background-color: #FFD700;
+    color: #000000 !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 
 [data-testid="stRadio"] label {
     background-color: #111111;
