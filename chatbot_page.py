@@ -36,13 +36,12 @@ def render_chatbot_page():
         optional live NYC Open Data examples, and OpenAI to generate a concise response.
         """
     )
-
     with st.expander("Chatbot settings", expanded=False):
-        context_path = st.text_input(
-    "Chatbot context parquet path",
-    value="https://drive.google.com/uc?export=download&id=1d2MtRMFB8Oinw60BF1ia-gfCICfMGXhe",
-    help="Google Drive direct link to chatbot_context.parquet.",
-)
+    context_path = st.text_input(
+        "Chatbot context parquet path",
+        value="https://drive.google.com/file/d/1d2MtRMFB8Oinw60BF1ia-gfCICfMGXhe/view?usp=sharing",
+        help="Google Drive link to chatbot_context.parquet.",
+    )
 
         model = st.text_input(
             "OpenAI model",
