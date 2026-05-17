@@ -4,6 +4,7 @@ import pydeck as pdk
 import altair as alt
 import json
 from chatbot_utils import generate_311_response
+import streamlit.components.v1 as components
 
 st.markdown("""
 <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
@@ -116,7 +117,8 @@ with nav_right:
         "Dashboard": "dashboard",
         "About Us": "about",
         "User Profile": "profile",
-        "AI Chatbot": "chatbot"
+        "AI Chatbot": "chatbot",
+        "Tableau": "tableau"
     }
 
     selected_label = st.radio(
@@ -629,3 +631,32 @@ elif st.session_state.page == "chatbot":
         })
 
         st.rerun()
+# =========================
+# TABLEAU PAGE
+# =========================
+elif st.session_state.page == "tableau":
+
+    st.markdown("""
+    <div style="display:flex; flex-direction:column; justify-content:center;">
+        <h1 style='margin-bottom:5px;'>NYC 311 Tableau Dashboard</h1>
+        <h3 style='margin-top:0; color:#FFD700;'>Additional interactive findings from Team 51</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="section-card">
+        <h3 style="color:#FFD700; margin-top:0;">Embedded Tableau View</h3>
+        <p style="font-size:16px; line-height:1.6;">
+        This section embeds the Tableau Public dashboard as an additional interactive layer
+        for exploring NYC 311 findings.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    tableau_url = "https://public.tableau.com/shared/5G9ZJ78GP?:showVizHome=no&:embed=true"
+
+    components.iframe(
+        tableau_url,
+        height=900,
+        scrolling=True
+    )
