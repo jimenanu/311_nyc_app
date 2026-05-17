@@ -39,10 +39,10 @@ def render_chatbot_page():
 
     with st.expander("Chatbot settings", expanded=False):
         context_path = st.text_input(
-            "Chatbot context parquet path",
-            value=DEFAULT_CONTEXT_PARQUET,
-            help="Keep chatbot_context.parquet in the same folder as app.py, or enter a relative/absolute path.",
-        )
+    "Chatbot context parquet path",
+    value="https://drive.google.com/uc?id=1d2MtRMFB8Oinw60BF1ia-gfCICfMGXhe",
+    help="Google Drive direct link to chatbot_context.parquet.",
+)
 
         model = st.text_input(
             "OpenAI model",
