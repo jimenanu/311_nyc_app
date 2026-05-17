@@ -3,6 +3,7 @@ import pandas as pd
 import pydeck as pdk
 import altair as alt
 import json
+from chatbot_utils import generate_311_response
 
 st.markdown("""
 <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
@@ -89,7 +90,7 @@ with nav_left:
     )
 
 with nav_right:
-    b1, b2, b3 = st.columns(3)
+    b1, b2, b3, b4 = st.columns(4)
 
     with b1:
         if st.button("Dashboard"):
@@ -102,6 +103,10 @@ with nav_right:
     with b3:
         if st.button("User Profile"):
             st.session_state.page = "profile"
+
+    with b4:
+        if st.button("AI Chatbot"):
+            st.session_state.page = "chatbot"
 
 st.divider()
 
@@ -538,3 +543,69 @@ elif st.session_state.page == "profile":
         st.info("No saved views yet. Create one above to bookmark your preferred view.")
 
     st.caption("User profile section added to make the Team 51 app feel more personalized and interactive.")
+
+# =========================
+# AI CHATBOT PAGE
+# =========================
+elif st.session_state.page == "chatbot":
+
+    col1, col2, col3 = st.columns([2, 4, 1])
+
+    with col1:
+        st.image("T51-NB2.png", width=500)
+
+    with col2:
+        st.markdown("""
+        <div style="display:flex; flex-direction:column; justify-content:center; height:100%;">
+            <h1 style='margin-bottom:5px;'>NYC 311 AI Assistant</h1>
+            <h3 style='margin-top:0; color:#FFD700;'>Interactive service guidance powered by GenAI</h3>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.image("nyc311-logo.png", width=120)
+
+    st.markdown("""
+    <div class="section-card">
+        <h3 style="color:#FFD700; margin-top:0;">Ask the Assistant</h3>
+        <p style="font-size:16px; line-height:1.6;">
+        This prototype helps classify common NYC 311 service questions and provides short,
+        resident-friendly next steps based on the likely complaint category and responsible agency.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = []
+
+    for message in st.session_state.chat_history:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    user_question = st.chat_input("Ask a NYC 311 question...")
+
+    if user_question:
+
+        st.session_state.chat_history.append({
+            "role": "user",
+            "content": user_question
+        })
+
+        result = generate_311_response(user_question)
+
+        assistant_response = f"""
+### Classification
+- **Issue:** {result["issue"]}
+- **Agency:** {result["agency"]}
+- **Urgency:** {result["urgency"]}
+
+### Response
+{result["response"]}
+"""
+
+        st.session_state.chat_history.append({
+            "role": "assistant",
+            "content": assistant_response
+        })
+
+        st.rerun()
