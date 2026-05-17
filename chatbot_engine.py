@@ -20,6 +20,7 @@ def load_chatbot_context(parquet_path: str = DEFAULT_CONTEXT_PARQUET) -> pd.Data
     """
 
     if str(parquet_path).startswith("http"):
+
     temp_path = "chatbot_context_temp.parquet"
 
     gdown.download(
@@ -32,17 +33,18 @@ def load_chatbot_context(parquet_path: str = DEFAULT_CONTEXT_PARQUET) -> pd.Data
     df = pd.read_parquet(temp_path)
     source_name = "google_drive_context"
 
-    else:
-        path = Path(parquet_path)
+else:
+    path = Path(parquet_path)
 
-        if not path.exists():
-            raise FileNotFoundError(
-                f"Parquet file not found: {path}. "
-                "Place chatbot_context.parquet in the app folder or update the path in chatbot_page.py."
-            )
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Parquet file not found: {path}. "
+            "Place chatbot_context.parquet in the app folder or update the path in chatbot_page.py."
+        )
 
-        df = pd.read_parquet(path)
-        source_name = path.name
+    df = pd.read_parquet(path)
+    source_name = path.name
+
 
     df.columns = (
         df.columns.astype(str)
