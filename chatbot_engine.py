@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 from typing import Dict, List
-
+import gdown
 import pandas as pd
 import requests
 from openai import OpenAI
@@ -20,16 +20,17 @@ def load_chatbot_context(parquet_path: str = DEFAULT_CONTEXT_PARQUET) -> pd.Data
     """
 
     if str(parquet_path).startswith("http"):
-        response = requests.get(parquet_path, timeout=60)
-        response.raise_for_status()
+    temp_path = "chatbot_context_temp.parquet"
 
-        temp_path = "chatbot_context_temp.parquet"
+    gdown.download(
+        parquet_path,
+        temp_path,
+        quiet=False,
+        fuzzy=True
+    )
 
-        with open(temp_path, "wb") as f:
-            f.write(response.content)
-
-        df = pd.read_parquet(temp_path)
-        source_name = "google_drive_context"
+    df = pd.read_parquet(temp_path)
+    source_name = "google_drive_context"
 
     else:
         path = Path(parquet_path)
