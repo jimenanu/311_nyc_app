@@ -4,3 +4,4 @@ pyarrow
 pydeck
 altair
 openai
+gdown
