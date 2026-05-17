@@ -113,7 +113,7 @@ with nav_left:
 
 with nav_right:
     page_options = {
-        "Dashboard": "dashboard",
+        "Main": "dashboard",
         "About Us": "about",
         "User Profile": "profile",
         "AI Chatbot": "chatbot",
