@@ -593,11 +593,13 @@ elif st.session_state.page == "chatbot":
 
         result = generate_311_response(user_question)
 
-        assistant_response = f"""
+       assistant_response = f"""
 ### Classification
 - **Issue:** {result["issue"]}
 - **Agency:** {result["agency"]}
-- **Urgency:** {result["urgency"]}
+- **Confidence Score:** {result["confidence"]}
+- **Escalation Recommendation:** {result["urgency"]}
+- **Recommended Action:** {result["action"]}
 
 ### Response
 {result["response"]}
